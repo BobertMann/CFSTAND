@@ -78,5 +78,5 @@ def heatmap_alltime(handle: str, save: bool = False):
 
 
 
-for key, val in recent_solves(input(), True).items():
-  print(f"{key}: {val}")
+# for key, val in recent_solves(input(), True).items():
+  # print(f"{key}: {val}")
