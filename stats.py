@@ -91,6 +91,7 @@ def verdict_counts(handle: str, save: bool = False, upsolve_only: bool = False, 
     verdict_counts[verdict] += 1
   return verdict_counts
 
+# returns a dictionary of the number of problems solved in each programming language
 def language_counts(handle: str, save: bool = False, upsolve_only: bool = False, force_save: bool = False):
   submissions = get_submissions(handle, save, force_save)
   language_counts = {}
@@ -102,3 +103,22 @@ def language_counts(handle: str, save: bool = False, upsolve_only: bool = False,
       language_counts[language] = 0
     language_counts[language] += 1
   return language_counts
+
+#returns a dictionary of the number of problems solved with each tag
+def tag_counts(handle: str, save: bool = False, upsolve_only: bool = False, force_save: bool = False):
+  submissions = get_submissions(handle, save, force_save)
+  tag_counts = {}
+  for sub in submissions:
+    if sub['verdict'] != 'OK':
+      continue
+    if sub['author']['participantType'] == 'CONTESTANT' and upsolve_only:
+      continue
+    for tag in sub['problem']['tags']:
+      if tag not in tag_counts:
+        tag_counts[tag] = 0
+      tag_counts[tag] += 1
+
+
+# returns data for each handle the user had in the past
+def user_info(handle: str):
+  return CFAPI.user_info(handle)
