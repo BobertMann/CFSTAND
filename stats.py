@@ -122,3 +122,8 @@ def tag_counts(handle: str, save: bool = False, upsolve_only: bool = False, forc
 # returns data for each handle the user had in the past
 def user_info(handle: str):
   return CFAPI.user_info(handle)
+
+#returns the current handle of the user
+def cur_handle(handle: str):
+  return CFAPI.user_info(handle)['handle']
+
