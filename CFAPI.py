@@ -5,6 +5,14 @@ import hashlib
 from sortedcontainers import SortedDict
 import pprint
 
+def user_info(handle, checkHistoricHandles = True):
+  url = f'https://codeforces.com/api/user.info?handles={handle}&checkHistoricHandles={str(checkHistoricHandles).lower()}'
+  response = requests.get(url)
+  if (response.json()['status'] != "OK"):
+    print(f"In request for user {handle}: {response.json()['comment']}")
+    exit()
+  return response.json()['result'][0]
+
 def public_submissions(handle):
   url = f'https://codeforces.com/api/user.status?handle={handle}'
   response = requests.get(url)
